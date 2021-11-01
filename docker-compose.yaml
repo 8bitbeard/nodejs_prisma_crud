@@ -6,16 +6,16 @@ services:
     depends_on:
       db:
         condition: service_healthy
-      env_file:
-        - ./.env
-      ports:
-        - 4000:4000
-      networks:
-        - defaults
-      volumes:
-        - .:/home/node/app
-        - /home/node/app/node_modules
-      restart: always
+    env_file:
+      - ./.env
+    ports:
+      - 4000:4000
+    networks:
+      - default
+    volumes:
+      - .:/home/node/app
+      - /home/node/app/node_modules
+    restart: always
 
   db:
     image: postgres:latest
@@ -24,7 +24,7 @@ services:
       - pgconf:/etc/postgresql
       - pglog:/var/log/postgresql
     networks:
-      - defaults
+      - default
     ports:
       - 5198:5432
     environment:
